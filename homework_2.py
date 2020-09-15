@@ -1,5 +1,5 @@
 
-print("Калькулятор массы тела by Danila Stasiuk ver 0.111 \n")
+print("Калькулятор массы тела by Danila Stasiuk ver 0.1 \n")
 
 #вводим переменные 
 weight = int(input('Пожалуйста, введите ваш вес (В кг): '))
