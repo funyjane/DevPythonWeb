@@ -86,7 +86,8 @@ user_2 = {
 users["user_2"] = user_2
 
 #выводим список пользователей
-for all_users in users:
-  print(users)
+print('Список всех пользователей: ')
+for x in users:
+  print(x)
 
 Q = input("press Q to exit the programm") 
