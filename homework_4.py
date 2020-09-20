@@ -23,12 +23,12 @@ print(result2)
 if list_of_vars[0] > (list_of_vars[1] + list_of_vars[2]):
     x = list_of_vars[0] - list_of_vars[1] - list_of_vars[2]
     print(x)
-
-#4. Если первое значение меньше или равно сумме второго и третьего вывести b + c - a   
-elif list_of_vars[0] <= (list_of_vars[1] + list_of_vars[2]):
+elif list_of_vars[0] <= (list_of_vars[1] + list_of_vars[2]): #4. Если первое значение меньше или равно сумме второго и третьего вывести b + c - a   
     x_1 = list_of_vars[1] + list_of_vars[2] - list_of_vars[0]
     print(x_1)
 
-#5. Если первое значение больше 50 и при этом одно из оставшихся значение больше первого вывести "Вася" (проверить одним условием)   
-elif list_of_vars[0] > 50 and list_of_vars[1] or list_of_vars[2] > list_of_vars[0]:
-    print('Уася')
+#5. Если первое значение больше 50 и при этом одно из оставшихся значений больше первого вывести "Вася" (проверить одним условием)   
+if list_of_vars[0] > 50 and list_of_vars[1] > list_of_vars[0] or list_of_vars[2] > list_of_vars[0]:
+    print('Уася')    
+elif list_of_vars[0] > 5 or (list_of_vars[1] == 7 and list_of_vars[2] == 7): #6. Если первое значение больше 5 или оба из оставшихся значений равны 7 вывести "Петя"
+    print('Петя')
