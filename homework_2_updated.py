@@ -87,7 +87,22 @@ users["user_2"] = user_2
 
 #выводим список пользователей
 print('Список всех пользователей: ')
-for x in users:
-  print(x)
+
+
+filtered_list = ['user_1', 'user_2']
+
+def seek_keys(d, key_list):
+    for k, v in d.items():
+        if k in key_list:
+            if isinstance(v, dict):
+                print(k + ": " + list(v.values())[0])
+            else:
+                print(k + ": " + str(v))
+        if isinstance(v, dict):
+            seek_keys(v, key_list)
+
+seek_keys(users, filtered_list)
+
+        
 
 Q = input("press Q to exit the programm") 
