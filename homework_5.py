@@ -1,34 +1,18 @@
 creds = {'dan' : 'test321', 'misha' : 'test123'}
 
-def enter_creds(func):
-    
-
-    def wrapper(*args):
-        user_name = input("Please enter your username: ")
-        user_pwd = input("Please enter your password: ")
-        if creds.get(user_name) == user_pwd:
-            print('correct')
-        else:
-            print('user name or password incorrect')
-    # если не сработает
-        try:
-            if creds[user_name] == user_pwd:
-                print('correct')
-            else:
-                print('wrong password')
-        except:
-            print('wrong user name')
-    return wrapper
+def decorator(func):
+  def wrapper(*args, **kwargs):
+        login = input('Enter login: ')
+        password = input('Enter password: ')
+        if login not in creds.keys() or creds[login] != password:
+            return 'Autorization required'
+        a = func(*args, **kwargs)
+        return a
+  return wrapper
 
 
-@enter_creds
-def tri_recursion(k):
-  if(k > 0):
-    result = k + tri_recursion(k - 1)
-    print(result)
-  else:
-    result = 0
-  return result
+@decorator
+def sum_numbers(a, b):
+    return a+b
 
-print("\n\nRecursion Example Results")
-tri_recursion(6)
+print(sum_numbers(2, 3))
