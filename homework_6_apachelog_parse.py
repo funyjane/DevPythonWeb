@@ -47,10 +47,10 @@ def browser_reader(file_name):
       
       for line in file:
          user_request = line[-40:]
-         for keys in browsers.keys():
+         for browser in browsers.keys():
             #4. Сколько запросов от каждого такого браузера ''' 
-                if keys in user_request:
-                    browsers[keys] += 1
+                if browser in user_request:
+                    browsers[browser] += 1
       print('Количество запросов от браузеров:')
       for keys, values in browsers.items():
             print(keys, '-', values)
