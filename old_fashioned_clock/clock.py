@@ -1,8 +1,12 @@
-def get_current_time():
-    # get and return current time some how
+from datetime import datetime, time
 
-    pass
-    # return time
+
+
+def get_current_time():
+    t_now = datetime.now().time()
+    time = t_now.strftime("%H:%M:%S")
+    return time
+
 def print_digits(current_time):
     pass
 
