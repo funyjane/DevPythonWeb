@@ -5,4 +5,8 @@ sqlparse==0.4.1
 isort==5.6.4
 pylint==2.6.0
 python-dotenv==0.14.0
+<<<<<<< HEAD
 pytz==2020.1
+=======
+pytz==2020.1
+>>>>>>> aca3d5e1442650247077f958f99b4bbc03bdb6f4
