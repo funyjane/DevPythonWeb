@@ -75,3 +75,39 @@ class Publisher(models.Model):
 
     def __str__(self):
         return self.house
+
+
+class Format(models.Model):
+    format = models.CharField(
+        "Format",
+        max_length=50,
+        blank=False,
+        null=False
+    )
+
+    def __str__(self):
+        return self.author
+
+
+class Age_res(models.Model):
+    format = models.CharField(
+        "Age restrictions",
+        max_length=50,
+        blank=False,
+        null=False
+    )
+
+    def __str__(self):
+        return self.author
+
+
+class Rating(models.Model):
+    format = models.CharField(
+        "Rating",
+        max_length=50,
+        blank=False,
+        null=False
+    )
+
+    def __str__(self):
+        return self.author
