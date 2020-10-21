@@ -1,5 +1,5 @@
 from django.db import models
-from references_db.models import *
+from refference_db.models import *
 from datetime import date
 
 class Book(models.Model):
@@ -111,6 +111,7 @@ class Book(models.Model):
         Rating,
         default=1,
         on_delete=models.PROTECT
+    )
 
 
     entry_date = models.DateTimeField(
