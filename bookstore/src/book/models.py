@@ -10,6 +10,11 @@ class Book(models.Model):
         null=False
     )
 
+    cover_photo = models.ImageField(
+        "Cover",
+        upload_to='media/'
+    )
+
     author_id = models.ManyToManyField(Author)
 
     genre_id = models.ManyToManyField(Genre)
