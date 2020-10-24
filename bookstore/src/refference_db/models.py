@@ -86,7 +86,7 @@ class Format(models.Model):
     )
 
     def __str__(self):
-        return self.author
+        return self.format
 
 
 class Age_res(models.Model):
