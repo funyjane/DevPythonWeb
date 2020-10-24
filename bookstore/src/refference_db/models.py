@@ -90,7 +90,7 @@ class Format(models.Model):
 
 
 class Age_res(models.Model):
-    format = models.CharField(
+    age_res = models.CharField(
         "Age restrictions",
         max_length=50,
         blank=False,
@@ -98,11 +98,11 @@ class Age_res(models.Model):
     )
 
     def __str__(self):
-        return self.author
+        return self.age_res
 
 
 class Rating(models.Model):
-    format = models.CharField(
+    rating = models.CharField(
         "Rating",
         max_length=50,
         blank=False,
@@ -110,4 +110,4 @@ class Rating(models.Model):
     )
 
     def __str__(self):
-        return self.author
+        return self.rating
