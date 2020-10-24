@@ -3,7 +3,7 @@ from refference_db.models import *
 from datetime import date
 
 class Book(models.Model):
-    title = models.CharField(
+    name = models.CharField(
         "Title",
         max_length=100,
         blank=False,
