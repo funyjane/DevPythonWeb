@@ -71,7 +71,6 @@ class Book(models.Model):
 
     ISBN = models.PositiveIntegerField(
         "ISBN",
-        max_length=13,
         default=0,
         blank=False,
         null=False

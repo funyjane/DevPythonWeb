@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Main</title>
+</head>
+
+<body>
+    <h1>Basically that's all what we got:</h1>
+
+    {% for book  in books_key %}
+        <a href="/book/{{ book.id }}">{{ book.title }} just for {{ book.price }} Br</a><br>
+    {% endfor %}
+
+</body>
+</html>

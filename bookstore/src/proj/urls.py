@@ -19,9 +19,14 @@ from hello_world.views import hello_world
 from django.conf import settings
 from django.conf.urls.static import static
 
+from book.views import show_books_list_view, show_book_by_pk
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', hello_world)
+    path('book/<int:book_id>/', show_book_by_pk),
+    path('hello/', hello_world),
+    path('', show_books_list_view),
 ]
 
 if settings.DEBUG:
