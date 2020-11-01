@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Main</title>
+</head>
+
+<body>
+<h1>Rating List</h1>
+  
+  {% for rating in ratings %}
+      <a href="/rating/{{ rating.pk }}">{{ rating.rating }}</a><br>
+  {% endfor %}
+    
+
+</body>
+</html>

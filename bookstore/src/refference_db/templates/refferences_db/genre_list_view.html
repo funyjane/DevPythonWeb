@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Main</title>
+</head>
+
+<body>
+<h1>Genre List</h1>
+  
+  {% for genre in genres %}
+      <a href="/genre/{{ genre.pk }}">{{ genre.genre }}</a><br>
+  {% endfor %}
+    
+
+</body>
+</html>
