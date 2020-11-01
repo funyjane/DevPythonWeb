@@ -23,7 +23,7 @@ def create_book_view (request):
     """creates a single book object"""
     
     if request.method == 'POST':
-        form = CreateBookForm(data=request.POST)
+        form = CreateBookForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')
