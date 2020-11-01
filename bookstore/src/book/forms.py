@@ -1,7 +1,14 @@
 from django import forms
+from . import models
 
 
 
+class CreateBookForm(forms.ModelForm):
+    class Meta:
+        model = models.Book
+        fields = '__all__'
 
-class CreateBookForm(forms.Form):
-    name = forms.CharField(max_length=50, required=True)
+class UpdateBookForm(forms.ModelForm):
+    class Meta:
+        model = models.Book
+        fields = '__all__'

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import Book
-from .forms import CreateBookForm
+from .forms import *
 
 
 def show_books_list_view(request):
@@ -19,15 +19,13 @@ def show_book_by_pk(request, book_id):
     con = {'book':book_obj}
     return render(request, template_name="book/book.html", context=con)
 
-
 def create_book_view (request):
-    """creates a single object"""
+    """creates a single book object"""
     
     if request.method == 'POST':
         form = CreateBookForm(data=request.POST)
         if form.is_valid():
-            book_name = form.cleaned_data.get('name')
-            Book.objects.create(title=book_name)
+            form.save()
             return HttpResponseRedirect('/')
     else:
         form = CreateBookForm()
@@ -36,3 +34,31 @@ def create_book_view (request):
         template_name='book/create_book.html',
         context={'form':form}
     )
+
+def update_book_view (request, pk):
+    """updates a single book object"""
+    
+    if request.method == 'POST':
+        form = UpdateBookForm(request.POST, request.FILES)
+        if form.is_valid():
+            old_book = Book.objects.get(pk=pk)
+            new_book = UpdateBookForm(request.POST, request.FILES, instance=old_book)
+            new_book.save()
+            return HttpResponseRedirect('/')
+    else:
+        book = Book.objects.get(pk=pk)
+        form = UpdateBookForm(instance=book)
+        return render(
+            request, 
+            template_name='book/update_book.html', 
+            context={'form':form}
+            )
+
+def delete_book_view(request, pk):
+    if request.method == "POST":
+        book = Book.objects.get(pk=pk)
+        book.delete()
+        return HttpResponseRedirect('/')
+    else:
+        book = Book.objects.get(pk=pk)
+    return render(request, template_name='book/delete_view.html', context={'book': book, 'header': book.title})

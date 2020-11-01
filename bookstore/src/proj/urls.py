@@ -26,7 +26,10 @@ from refference_db.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('book/<int:book_id>/', show_book_by_pk),
-    
+    path('book/create/', create_book_view),
+    path('book/update/<int:pk>/', update_book_view),
+    path('book/delete/<int:pk>/', delete_book_view),
+
     path('genre/', genre_list_view),
     path('genre/<int:pk>/', genre_view),
     path('genre/create/', create_genre_view),

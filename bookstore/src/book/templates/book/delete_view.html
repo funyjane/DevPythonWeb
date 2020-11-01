@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Main</title>
+  <title>Delete {{ header}}</title>
 </head>
 
 <body>
-    <h1>Create Book</h1>
-    <form action="" method="post">
+    <h1>Do you want to delete "{{ header }}"?</h1>
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{form.as_p}}
         <button type="submit">Submit</button>
     </form>
     
