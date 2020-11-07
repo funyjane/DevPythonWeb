@@ -10,7 +10,7 @@
 <body>
 <h1>Format List</h1>
   
-  {% for format in formats %}
+  {% for format in object_list %}
       <a href="/format/{{ format.pk }}">{{ format.format }}</a><br>
   {% endfor %}
     

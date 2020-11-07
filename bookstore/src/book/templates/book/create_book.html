@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'customer_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+Create Book
+{% endblock title %}
+{% block body %}
 
-<head>
-  <meta charset="utf-8">
-
-  <title>Main</title>
-</head>
-
-<body>
-    <h1>Create Book</h1>
+      <h1>Create Book</h1>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-    
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Submit</button>
 
-</body>
-</html>
+{% endblock body %}
+    

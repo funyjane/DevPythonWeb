@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hello_world',
     'refference_db',
-    'book'
+    'book',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'proj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +75,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
 ]
 
 WSGI_APPLICATION = 'proj.wsgi.application'
@@ -132,3 +136,5 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = local_settings.LOCAL_STATIC_ROOT
 MEDIA_ROOT = local_settings.LOCAL_MEDIA_ROOT
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

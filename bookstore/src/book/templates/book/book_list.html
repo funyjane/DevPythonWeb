@@ -1,18 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'customer_base.html' %}
+{% load static %}
+{% block title %}
+Main
+{% endblock title %}
+{% block body %}
 
-<head>
-  <meta charset="utf-8">
+       <h1>Новинки</h1>
+       
 
-  <title>Main</title>
-</head>
-
-<body>
-    <h1>Basically that's all what we got:</h1>
-
-    {% for book  in books_key %}
-        <a href="/book/{{ book.id }}">{{ book.title }} just for {{ book.price }} Br</a><br>
-    {% endfor %}
-
-</body>
-</html>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Название</th>
+              <th scope="col">Автор</th>
+              <th scope="col">Жанр</th>
+              <th scope="col"><a href="{% url 'book-create' %}" class="btn btn-primary">Добавить новую книгу</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj  in object_list %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ obj.title }}</td>
+              {% for auth  in obj.author_id.all %}
+              <td>{{ auth }}</td>
+              {% endfor %}
+              {% for genr  in obj.genre_id.all %}
+              <td>{{ genr }}</td>
+              {% endfor %}
+              <td> <a href="{% url 'book-view' obj.pk %}" class="btn btn-success"><i class="far fa-eye"></i></a> <a href="{% url 'book-update' obj.pk %}" class="btn btn-warning"><i class="far fa-edit"></i></a> <a href="{% url 'book-delete' obj.pk %}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>  </td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+{% endblock body %}

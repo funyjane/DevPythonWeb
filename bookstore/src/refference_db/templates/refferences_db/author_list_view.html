@@ -10,7 +10,7 @@
 <body>
 <h1>Authors List</h1>
   
-  {% for author in authors %}
+  {% for author in object_list %}
       <a href="/author/{{ author.pk }}">{{ author.author }}</a><br>
   {% endfor %}
     

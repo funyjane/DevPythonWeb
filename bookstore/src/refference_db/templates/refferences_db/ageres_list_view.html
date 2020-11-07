@@ -10,7 +10,7 @@
 <body>
 <h1>Age restrictions List</h1>
   
-  {% for age in age_restrictions %}
+  {% for age in object_list %}
       <a href="/age/{{ age.pk }}">{{ age.age_res }}</a><br>
   {% endfor %}
     

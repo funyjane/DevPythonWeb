@@ -10,7 +10,7 @@
 <body>
 <h1>Series List</h1>
   
-  {% for seria in series %}
+  {% for seria in object_list %}
       <a href="/series/{{ seria.pk }}">{{ seria.title }}</a><br>
   {% endfor %}
     

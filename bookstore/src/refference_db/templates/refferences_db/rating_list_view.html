@@ -10,7 +10,7 @@
 <body>
 <h1>Rating List</h1>
   
-  {% for rating in ratings %}
+  {% for rating in object_list %}
       <a href="/rating/{{ rating.pk }}">{{ rating.rating }}</a><br>
   {% endfor %}
     
