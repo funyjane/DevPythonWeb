@@ -5,17 +5,17 @@ Main
 {% endblock title %}
 {% block body %}
 
-       <h1>Новинки</h1>
+       <h1>Fresh Updates</h1>
        
 
         <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Название</th>
-              <th scope="col">Автор</th>
-              <th scope="col">Жанр</th>
-              <th scope="col"><a href="{% url 'book-create' %}" class="btn btn-primary">Добавить новую книгу</th>
+              <th scope="col">Title</th>
+              <th scope="col">Author</th>
+              <th scope="col">Genre</th>
+              <th scope="col"><a href="{% url 'book-create' %}" class="btn btn-primary">Create a new book</th>
             </tr>
           </thead>
           <tbody>

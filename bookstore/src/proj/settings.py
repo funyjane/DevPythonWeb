@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'refference_db',
     'book',
     'crispy_forms',
+    'catalog'
 ]
 
 MIDDLEWARE = [

@@ -30,31 +30,30 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="{% static "starter-template.css" %}" rel="stylesheet">
-
+    
     <title>{% block title %}Default title{% endblock title %}</title>
   </head>
   <body>
     <nav class="navbar fixed-top navbar-light navbar-expand-md bg-light justify-content-center">
-      <a href="" class="navbar-brand mr-0">Читай-Город</a>
+      <a href="/" class="navbar-brand mr-0">City-Reads</a>
       <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
-          <span class="navbar-toggler-icon"></span>
-      </button>
+          <span class="navbar-toggler-icon"></span></button>
       <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
           <ul class="navbar-nav mx-auto text-center">
               <li class="nav-item">
-                  <a class="nav-link" href="">Каталог</a>
+                  <a class="nav-link" href="/catalog/">Catalog</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="">О нас</a>
+                  <a class="nav-link" href="">About us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Доставка и оплата</a>
+                <a class="nav-link" href="#">Shipping and Payments</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Возврат</a>
+                <a class="nav-link" href="#">Returns</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Контакты</a>
+                <a class="nav-link" href="#">Contacts</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#"><i class="far fa-user"></i></a>
@@ -80,7 +79,41 @@
         {% endblock body %}
       </div>
     
-    </main>
+     <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+        <a href="" class="navbar-brand mr-0">City Reads</a>
+        <small class="d-block mb-3 text-muted">Minsk, Pervomayskaya str. 24</small>
+        <small class="d-block mb-3 text-muted">chitaygorod@gmail.com</small>
+        <small class="d-block mb-3 text-muted">8(800)854 856 888</small>
+      </div>
+      <div class="col-6 col-md">
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">About us</a></li>
+          <li><a class="text-muted" href="/catalog/">Catalog</a></li>
+          <li><a class="text-muted" href="#">Shipping and Payments</a></li>
+          <li><a class="text-muted" href="#">Returns</a></li>
+          <li><a class="text-muted" href="#">Contacts</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Payment methods</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted"><i class="fab fa-cc-visa"> Visa</i></a></li>
+          <li><a class="text-muted"><i class="fab fa-cc-mastercard"> Mastercard</i></a></li>
+          <li><a class="text-muted"><i class="fab fa-cc-paypal"> PayPal</i></a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Our socials</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a class="text-muted" href="#"><i class="fab fa-vk"></i> Vkontakte</a></li>
+          <li><a class="text-muted" href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
