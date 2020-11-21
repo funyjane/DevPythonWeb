@@ -23,7 +23,7 @@ Cart
 <tbody>
 {% for book_in_cart in cart.books.all %}
     <tr>
-        <td><img src={{ book_in_cart.book.cover_photo }} class="mr-3" width="64" height="64"></td>
+        <td><img src={{ book_in_cart.book.cover_photo.url }} class="mr-3" width="64" height="64"></td>
         <td>{{ book_in_cart.book.title }}</td>
         <td><input type="number" name="{{ book_in_cart.pk }}" id="" class="form-control" value="{{ book_in_cart.quantity }}"></td>
         <td>{{ book_in_cart.price }}</td>
