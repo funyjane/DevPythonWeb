@@ -71,10 +71,11 @@ urlpatterns = [
     path('rating/create/', CreateRatingView.as_view(), name = 'rating-create'),
     path('rating/update/<int:pk>/', UpdateRatingView.as_view(), name = 'rating-update'),
     path('rating/delete/<int:pk>/', DeleteRatingView.as_view(), name = 'rating-delete'),
-
+    
+    path('cart/', include('orders.urls', namespace = 'orders')),
     path('catalog/', include('catalog.urls')),
     
-    path('', BookListView.as_view()),
+    path('', BookListView.as_view())
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

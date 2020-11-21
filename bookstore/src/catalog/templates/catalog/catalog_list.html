@@ -33,21 +33,23 @@ Catalog
 
 <div class="container">
   <h3>Fresh arrivals</h3>
-  <div class="card-deck">
-    {% for book  in newdeals %}
-    <div class="card">
-      <img src={{ book.cover_photo.url }} class="card-img-top">
-      <div class="card-body">
-        <h5 class="card-title">{{book.title}}</h5>
-        {% for auth in book.author_id.all %}
-        <p class="card-text">{{ auth }}</p>
-        {% endfor %}
+    <div class="card-deck">
+      {% for book  in newdeals %}
+      <div class="card">
+        <a class="linky" href="{% url 'book-view' book.pk %}">
+          <img src={{ book.cover_photo.url }} class="card-img-top">
+        </a>
+          <div class="card-body">
+            <h5 class="card-title">{{book.title}}</h5>
+            {% for auth in book.author_id.all %}
+            <p class="card-text">{{ auth }}</p>
+            {% endfor %}
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{ book.price }} BYN </small>
+          </div>
       </div>
-      <div class="card-footer">
-        <small class="text-muted">{{ book.price }} BYN </small>
-      </div>
+    {% endfor %}
     </div>
-  {% endfor %}
-  </div>
 </div>
 {% endblock body %}

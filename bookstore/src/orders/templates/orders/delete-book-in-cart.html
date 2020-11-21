@@ -1,0 +1,10 @@
+{% extends 'customer_base.html' %}
+{% load static %}
+{% block title %}
+Delete Book in cart
+{% endblock title %}
+{% block body %}
+    <h1>You are about to delete {{ object.book.title }} from the cart</h1>
+    <form action="" method="post">{% csrf_token %}<button type="submit" class="btn btn-danger">Delete</button></form>
+
+{% endblock body %}

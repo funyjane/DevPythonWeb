@@ -1,0 +1,40 @@
+{% extends 'customer_base.html' %}
+{% load static %}
+{% block title %}
+Cart
+{% endblock title %}
+{% block body %}
+
+<h4>Cart</h4>
+
+<form action="{% url 'orders:update' %}" method="post">
+    {% csrf_token %}
+<table class="table">
+
+<thead>
+<tr>
+    <th scope="col">Photo</th>
+    <th scope="col">Title</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Price</th>
+    <th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+{% for book_in_cart in cart.books.all %}
+    <tr>
+        <td><img src={{ book_in_cart.book.cover_photo }} class="mr-3" width="64" height="64"></td>
+        <td>{{ book_in_cart.book.title }}</td>
+        <td><input type="number" name="{{ book_in_cart.pk }}" id="" class="form-control" value="{{ book_in_cart.quantity }}"></td>
+        <td>{{ book_in_cart.price }}</td>
+        <td><a href="{% url 'orders:book-in-cart-del' book_in_cart.pk %}" class="btn btn-danger"><i class="far fa-trash-alt"></a></td>
+    </tr>
+{% endfor %}
+</table>
+
+<h6>Total price: {{ cart.total_price }} BYN</h6>
+
+<button name="submit_button" type="submit" class="btn btn-danger" value="checkout">Checkout</button> <button name="submit_button" type="submit" class="btn btn-success" value="edit">Edit</button>
+</form>
+        
+{% endblock body %}

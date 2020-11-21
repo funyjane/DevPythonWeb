@@ -29,7 +29,7 @@ Main
               {% for genr  in obj.genre_id.all %}
               <td>{{ genr }}</td>
               {% endfor %}
-              <td> <a href="{% url 'book-view' obj.pk %}" class="btn btn-success"><i class="far fa-eye"></i></a> <a href="{% url 'book-update' obj.pk %}" class="btn btn-warning"><i class="far fa-edit"></i></a> <a href="{% url 'book-delete' obj.pk %}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>  </td>
+              <td> <a href="{% url 'book-view' obj.pk %}" class="btn btn-success"><i class="far fa-eye"></i></a> <a href="{% url 'book-update' obj.pk %}" class="btn btn-warning"><i class="far fa-edit"></i></a> <a href="{% url 'book-delete' obj.pk %}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a> <a href="{% url 'orders:cart' %}?book={{ obj.pk }}" class="btn btn-info"><i class="fas fa-cart-plus"></i></a>  </td>
               {% endfor %}
             </tr>
           </tbody>
