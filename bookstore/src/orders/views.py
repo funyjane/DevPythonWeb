@@ -21,10 +21,10 @@ class CartView(TemplateView):
             cart = models.Cart.objects.filter(pk=cart_id).first()
             if not cart:
                 cart = models.Cart.objects.create(customer=user)
-                self.request.sessions['cart_id'] = cart.pk
+                self.request.session['cart_id'] = cart.pk
         else:
             cart = models.Cart.objects.create(customer=user)
-            self.request.sessions['cart_id'] = cart.pk
+            self.request.session['cart_id'] = cart.pk
         context["cart"] = cart
         # step-2: add a book to the cart
         book_id = self.request.GET.get('book')
