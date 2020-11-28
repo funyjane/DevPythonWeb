@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, DeleteView, RedirectView
+from django.views.generic import TemplateView, DeleteView, RedirectView, UpdateView, DetailView
 from django.urls import reverse_lazy
 
 from book import models as book_models
@@ -70,12 +70,43 @@ class CartUpdateView(RedirectView):
             for book_in_cart_id, quantity in self.request.POST.items():
                 if book_in_cart_id not in ['csrfmiddlewaretoken', 'submit_button']:
                     book_in_cart = models.BookInCart.objects.get(pk=int(book_in_cart_id))
-                    if book_in_cart.cart.pk == self.cart_id:
+                    if book_in_cart.cart.pk == cart_id:
                         book_in_cart.quantity = int(quantity)
                         obj_list.append(book_in_cart)
             models.BookInCart.objects.bulk_update(obj_list, ['quantity'])
         else:
-            pass
-            #checkout
-
+            user = self.request.user
+            if not isinstance(user, models.User):
+                user = None
+            models.Order.objects.create(
+                user=user,
+                cart= models.Cart.objects.get(pk=cart_id)
+            )
+            self.request.session['order_id'] = str(self.request.session['cart_id'])
+            del self.request.session['cart_id']
+            return reverse_lazy('orders:create-order')
+            
         return reverse_lazy('orders:cart')
+
+class CreateOrderView(UpdateView):
+    template_name = 'orders/order.html'
+    success_url = reverse_lazy('main-manager')
+    model = models.Order
+    fields = [
+        'name',
+        'phone',
+        'email',
+        'delivery'
+    ]
+    def get_object(self, *args, **kwargs):
+        obj = models.Order.objects.get(cart__pk__exact=self.request.session['order_id'])
+        print(obj)
+        return obj
+    
+class HistoryDetailView(DetailView):
+    model = models.User
+    template_name = 'orders/history.html'
+    def get_object(self, *args, **kwargs):
+        obj = models.User.objects.get(username=self.request.user)
+        print(obj.orders.all)
+        return obj

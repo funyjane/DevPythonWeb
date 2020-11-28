@@ -1,12 +1,195 @@
 {% extends 'customer_base.html' %}
 {% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static "mdb.ecommerce.min.css" %}">
+  <style>
+    @media (max-width: 450px) {
+      .carousel .carousel-inner .carousel-item .view img {
+        height: 50vh;
+        width: auto !important;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+      }
+    }
+  </style>
+{% endblock head %}
 {% block title %}
 {{ book.title }}
 {% endblock title %}
 {% block body %}
 
-    <h1>This is {{ book.title }} for just {{ book.price }} Br</h1>
-    Original series of: {{ book.series.title }}<br>
-    Published by: {{ book.publisher.house }}<br>
+    <div class="jumbotron color-grey-light mt-70">
+      <div class="d-flex align-items-center h-100">
+        <div class="container text-center py-5">
+          <!--Grid row-->
+          <div class="row d-flex align-items-center">
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-3 mb-md-0">
+
+              <h2 class="font-weight-bold dark-grey-text mb-0 text-center text-md-left">{{ book.title }}</h2>
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6">
+
+              <ol class="breadcrumb rounded-0 bg-transparent d-flex justify-content-center float-md-right p-0 mb-0">
+                <li class="breadcrumb-item">
+                  <a class="text-muted" href="/" title="Home">Home</a>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                  {{ book.genre_id.first }}
+                </li>
+                <li class="breadcrumb-item active font-weight-bold">
+                  {{ book.title }}
+                </li>
+              </ol>
+
+            </div>
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+        </div>
+      </div>
+    </div>
+
+  </header>
+  <!-- Main Navigation -->
+
+  <!-- Main layout -->
+  <main>
+
+    <div class="container">
+
+      <!--Section: Block Content-->
+      <section class="my-5">
+
+        <div class="row">
+          <div class="col-md-5 mb-4 mb-md-0">
+
+            <div class="shadow view zoom z-depth-2 rounded">
+              <img class="shadow img-fluid w-100 rounded" src="{{ book.cover_photo.url }}" alt="Sample">
+              <a href="#!">
+                <div class="mask"></div>
+              </a>
+            </div>
+
+          </div>
+          <div class="col-md-7">
+
+            <h5>{{ book.title }}</h5>
+            <p class="mb-2 text-muted text-uppercase small">BY: {{ book.author_id.first }}</p>
+           
+            <p><span class="mr-1"><strong>{{ book.price }} BYN </strong></span></p>
+            <p class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+              error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam.</p>
+            <div class="table-responsive">
+              <table class="table table-sm table-borderless mb-0">
+                <tbody>
+                  <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>Series: </strong></th>
+                    <td>{{ book.series }}</td>
+                  </tr>
+                  <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>Publisher: </strong></th>
+                    <td>{{ book.publisher }}</td>
+                  </tr>
+                  <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>Published: </strong></th>
+                    <td>{{ book.publishing_date }}</td>
+                  </tr>
+                  <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>Number of pages: </strong></th>
+                    <td>{{ book.pages_num }}</td>
+                  </tr>
+                  <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>Binding: </strong></th>
+                    <td>{{ book.binding }}</td>
+                  </tr>
+                  <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>Format: </strong></th>
+                    <td>{{ book.format }}</td>
+                  </tr>
+                  <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>ISBN: </strong></th>
+                    <td>{{ book.ISBN }}</td>
+                  </tr>
+                   <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>Weight: </strong></th>
+                    <td>{{ book.weight }}</td>
+                  </tr>
+                   <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>Age restriction: </strong></th>
+                    <td>{{ book.age_res }}</td>
+                  </tr>
+                  <tr>
+                    <th class="pl-0 w-25" scope="row"><strong>Rating: </strong></th>
+                    <td>{{ book.rating }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <hr>
+            <a href="{% url 'orders:cart' %}?book={{ book.pk }}"  class="btn btn-primary btn-md mr-1 mb-2">Buy now</a>
+            <a href="{% url 'orders:cart' %}?book={{ book.pk }}" class="btn btn-light btn-md mr-1 mb-2"><i
+                class="fas fa-shopping-cart pr-2"></i>Add to cart</a>
+          </div>
+        </div>
+
+      </section>
+      <!--Section: Block Content-->
+
+      <!--Section: New products-->
+      <section>
+
+        <h3 class="text-center pt-5 mb-0">Our latest collection</h3>
+
+        <!-- Grid row -->
+        <div class="row mt-5 mb-4">
+        
+        {% for book  in newdeals %}
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+              <div class="view zoom z-depth-2 rounded">
+                <a class="linky" href="{% url 'book-view' book.pk %}">
+                <img class="img-fluid w-100" src="{{ book.cover_photo.url }}" alt="Sample">
+                  <div class="mask"></div>
+                </a>
+              </div>
+
+              <div class="text-center pt-4">
+
+                <h5>{{ book.title }}</h5>
+                <h6 class="mb-3">{{ book.price }} BYN </h6>
+                <a href="{% url 'orders:cart' %}?book={{ book.pk }}" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</a>
+                
+
+              </div>
+
+            </div>
+            <!-- Card -->
+
+          </div>
+          {% endfor %}
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </section>
+      <!--Section: New products-->
+
+    </div>
+
+  </main>
 
 {% endblock body %}

@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+{% extends 'customer_base.html' %}
+{% load static %}
+{% block title %}
+Genre: {{ genre.genre }}
+{% endblock title %}
+{% block body %}
 
-<head>
-  <meta charset="utf-8">
-
-  <title>Main</title>
-</head>
-
-<body>
 <h1>Genre List</h1>
   
   {% for genre in object_list %}
       <a href="/genre/{{ genre.pk }}">{{ genre.genre }}</a><br>
   {% endfor %}
-    
 
-</body>
-</html>
+    
+{% endblock body %}

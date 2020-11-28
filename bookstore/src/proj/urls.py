@@ -18,12 +18,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 from book.views import *
 from refference_db.views import *
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('profile/', include('authentication.urls', namespace='profile')),
 
     path('book/<int:pk>/', BookView.as_view(), name = 'book-view'),
     path('book/create/', CreateBookView.as_view(), name = 'book-create'),
@@ -75,7 +77,7 @@ urlpatterns = [
     path('cart/', include('orders.urls', namespace = 'orders')),
     path('catalog/', include('catalog.urls')),
     
-    path('', BookListView.as_view())
+    path('', BookListView.as_view(), name = 'main-manager')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

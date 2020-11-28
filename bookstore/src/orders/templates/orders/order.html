@@ -1,0 +1,18 @@
+{% extends 'orders/cart.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+Order
+{% endblock title %}
+
+
+{% block internal %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    {{ cart_id }}
+    <button type="submit">Order</button>
+</form>
+
+{% endblock internal %}

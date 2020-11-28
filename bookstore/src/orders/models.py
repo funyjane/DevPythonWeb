@@ -66,3 +66,55 @@ class BookInCart(models.Model):
         return f"{self.book} in cart"
 
 
+class Order(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name='orders',
+        blank=True,
+        null=True
+    )
+
+    cart = models.OneToOneField(
+        Cart,
+        on_delete=models.PROTECT,
+        related_name='order',
+        verbose_name='Order',
+    )
+    name = models.CharField(
+        verbose_name='name',
+        max_length=255,
+    )
+    phone = models.CharField(
+        verbose_name='Phone number',
+        max_length=20,
+    )
+    email = models.EmailField(
+        verbose_name='E-mail',
+        max_length=40,
+    )
+    DELIVERY_CHOICES = [
+        ('pu', 'Self pickup'),
+        ('cr', ' Courrier delivery'),
+        ('pt', 'Postal delivery')
+    ]
+    delivery = models.CharField(
+        verbose_name='Delivery type',
+        max_length=2,
+        choices=DELIVERY_CHOICES,
+        default='pu'
+    )
+    create_date = models.DateTimeField(
+        verbose_name='Created date',
+        auto_now=False,
+        auto_now_add=True
+    )
+    update_date = models.DateTimeField(
+        verbose_name='Update date',
+        auto_now=True,
+        auto_now_add=False,
+    )
+    already_paid = models.BooleanField(
+        verbose_name='Paid',
+        default=False
+    )

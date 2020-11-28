@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.http import HttpResponse, HttpResponseRedirect
 
+from book.models import Book
 from .models import *
 from .forms import *
 
@@ -9,14 +10,26 @@ from .forms import *
 class GenreListView(ListView):
     """displays a list of all Genre objects"""
 
+    paginate_by = 5
     template_name = "refferences_db/genre_list_view.html"
     model = Genre
+    
 
 class GenreView(DetailView):
     """displays a single Genre objects"""
 
+    paginate_by = 5
     model = Genre
     template_name = "refferences_db/genre_view.html"
+
+    def get_context_data(self, **kwargs):
+        object_list = Book.objects.filter(genre_id=self.get_object())
+        context = super().get_context_data(**kwargs)
+        context["books"] = object_list
+        return context
+    
+
+    
 
 class CreateGenreView(CreateView):
     """creates a single Genre object"""
@@ -46,6 +59,7 @@ class DeleteGenreView(DeleteView):
 class AuthorListView(ListView):
     """displays a list of all Author objects"""
 
+    paginate_by = 5
     template_name = "refferences_db/author_list_view.html"
     model = Author
 
@@ -83,6 +97,7 @@ class DeleteAuthorView(DeleteView):
 class SeriesListView(ListView):
     """displays a list of all Series objects"""
 
+    paginate_by = 5
     template_name = "refferences_db/series_list_view.html"
     model = Series
 
@@ -120,6 +135,7 @@ class DeleteSeriesView(DeleteView):
 class PublisherListView(ListView):
     """displays a list of all Publisher objects"""
 
+    paginate_by = 5
     template_name = "refferences_db/publisher_list_view.html"
     model = Publisher
 
@@ -157,6 +173,7 @@ class DeletePublisherView(DeleteView):
 class FormatListView(ListView):
     """displays a list of all Format objects"""
 
+    paginate_by = 5
     template_name = "refferences_db/format_list_view.html"
     model = Format
 
@@ -194,6 +211,7 @@ class DeleteFormatView(DeleteView):
 class Age_resListView(ListView):
     """displays a list of all Age_res objects"""
 
+    paginate_by = 5
     template_name = "refferences_db/ageres_list_view.html"
     model = Age_res
 
@@ -228,66 +246,10 @@ class DeleteAge_resView(DeleteView):
 
 
 
-def rating_list_view(request):
-    '''displays a list of all rating objects'''
-
-    context = {'ratings': Rating.objects.all()}
-    return render(request, template_name='refferences_db/rating_list_view.html', context=context)
-
-def rating_view(request, pk):
-    '''displays a single rating object'''
-
-    context = {'rating': Rating.objects.get(pk=pk)}
-    return render(request, template_name='refferences_db/rating_view.html', context=context)
-
-def create_rating_view (request):
-    """creates a single rating object"""
-    
-    if request.method == 'POST':
-        form = CreateRatingForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/rating')
-    else:
-        form = CreateRatingForm()
-    return render(
-        request,
-        template_name='refferences_db/create_rating.html',
-        context={'form':form}
-    )
-
-def update_rating_view (request, pk):
-    """updates a single rating object"""
-    
-    if request.method == 'POST':
-        form = UpdateRatingForm(data=request.POST)
-        if form.is_valid():
-            rating_name = form.cleaned_data.get('rating')
-            new_rating = Rating.objects.get(pk=pk)
-            new_rating.rating = rating_name
-            new_rating.save()
-            return HttpResponseRedirect('/rating')
-    else:
-        rating = Rating.objects.get(pk=pk)
-        form = UpdateRatingForm(data={'rating':rating.rating})
-        return render(
-            request, 
-            template_name='refferences_db/update_rating.html', 
-            context={'form':form}
-            )
-
-def delete_rating_view(request, pk):
-    if request.method == "POST":
-        rating = Rating.objects.get(pk=pk)
-        rating.delete()
-        return HttpResponseRedirect('/rating')
-    else:
-        rating = Rating.objects.get(pk=pk)
-    return render(request, template_name='refferences_db/delete_view.html', context={'rating': rating, 'header': rating.rating})
-
 class RatingListView(ListView):
     """displays a list of all Rating objects"""
 
+    paginate_by = 5
     template_name = "refferences_db/rating_list_view.html"
     model = Rating
 

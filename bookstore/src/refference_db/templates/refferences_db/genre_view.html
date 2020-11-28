@@ -1,17 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+{% extends 'customer_base.html' %}
+{% load static %}
+{% block title %}
+Genre: {{ genre.genre }}
+{% endblock title %}
+{% block body %}
 
-<head>
-  <meta charset="utf-8">
 
-  <title>Title</title>
-</head>
-
-<body>
 <h1>{{ genre.genre }}</h1>
 
-<b>Description</b> - {{ genre.description}}
-    
+   
 
-</body>
-</html>
+<section>
+
+        <h3 class="text-center pt-5 mb-0">{{ genre.description}}</h3>
+
+        <!-- Grid row -->
+        <div class="row mt-5 mb-4">
+        
+        {% for book  in books %}
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-3 mb-4">
+
+            <!-- Card -->
+            <div class="">
+
+              <div  class="view zoom z-depth-2 rounded">
+                <img class="shadow rounded mr-3" width="180" height="200" src="{{ book.cover_photo.url }}" alt="Sample">
+                <a href="{% url 'book-view' book.pk %}">
+                  <div class="mask"></div>
+                </a>
+              </div>
+
+              <div class="text-center pt-4">
+
+                <h5>{{ book.title }}</h5>
+                <h6 class="mb-3">{{ book.price }} BYN </h6>
+                <a href="{% url 'orders:cart' %}?book={{ book.pk }}" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</a>
+                <a href="{% url 'book-view' book.pk %}" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                  data-placement="top"><i class="far fa-eye"></i></a>
+
+              </div>
+
+            </div>
+            <!-- Card -->
+
+          </div>
+          {% endfor %}
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </section>
+
+
+{% endblock body %}

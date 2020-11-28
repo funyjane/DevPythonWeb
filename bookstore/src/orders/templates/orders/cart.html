@@ -5,6 +5,7 @@ Cart
 {% endblock title %}
 {% block body %}
 
+{% block internal %}
 <h4>Cart</h4>
 
 <form action="{% url 'orders:update' %}" method="post">
@@ -23,7 +24,7 @@ Cart
 <tbody>
 {% for book_in_cart in cart.books.all %}
     <tr>
-        <td><img src="{{ book_in_cart.book.cover_photo.url }}" class="mr-3" width="64" height="64"></td>
+        <td><img src="{{ book_in_cart.book.cover_photo.url }}" class="shadow rounded mr-3" width="60" height="80"></td>
         <td>{{ book_in_cart.book.title }}</td>
         <td><input type="number" name="{{ book_in_cart.pk }}" id="" class="form-control" value="{{ book_in_cart.quantity }}"></td>
         <td>{{ book_in_cart.price }}</td>
@@ -36,5 +37,6 @@ Cart
 
 <button name="submit_button" type="submit" class="btn btn-danger" value="checkout">Checkout</button> <button name="submit_button" type="submit" class="btn btn-success" value="edit">Edit</button>
 </form>
-        
+
+{% endblock internal %}
 {% endblock body %}

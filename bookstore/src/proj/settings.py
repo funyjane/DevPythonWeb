@@ -13,6 +13,7 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 from . import local_settings
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,7 +49,9 @@ INSTALLED_APPS = [
     'book',
     'crispy_forms',
     'catalog',
-    'orders'
+    'orders',
+    'authentication',
+    'phonenumber_field'
 ]
 
 MIDDLEWARE = [
@@ -115,6 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

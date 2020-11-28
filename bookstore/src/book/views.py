@@ -18,6 +18,8 @@ class BookListView(ListView):
 class BookView(DetailView):
     """displays a single Book objects"""
 
+    newdeals = Book.objects.all().order_by('-pk')[:4]
+    extra_context = {'newdeals':newdeals}
     model = Book
     template_name = "book/book.html"
 

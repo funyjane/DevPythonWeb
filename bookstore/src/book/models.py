@@ -10,6 +10,13 @@ class Book(models.Model):
         null=False
     )
 
+    description = models.TextField(
+        "About the book",
+        max_length=500,
+        blank=True,
+        null=True
+    )
+
     cover_photo = models.ImageField(
         "Cover",
         upload_to='media/'
