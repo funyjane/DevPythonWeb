@@ -13,7 +13,7 @@ from . import models
 
 class AuthenticationView(LoginView):
     template_name = 'registration/log_in.html'
-
+    success_url = reverse_lazy('profile:profile-view')
 
 class AuthLogoutView(LogoutView):
     template_name = 'registration/log_out.html'
@@ -33,7 +33,7 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('profile:profile-update')
     success_message = "Your profile has been created successfully"
 
-def form_valid(self, form):
+    def form_valid(self, form):
         form.save()
         username = self.request.POST['username']
         password = self.request.POST['password1']
@@ -42,7 +42,8 @@ def form_valid(self, form):
         return HttpResponseRedirect(reverse_lazy('profile:profile-view'))
 
 
-class ProfileView(TemplateView):
+
+class ProfileView(LoginRequiredMixin, TemplateView):
     model = models.Profile
     template_name = 'authentication/profile.html'
 
@@ -65,8 +66,8 @@ class ProfileView(TemplateView):
         return context
 
 
-class UpdateProfileView(UpdateView):
-    form_class = forms.UpdateProfileForm
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
+    
     model = models.Profile
     template_name = 'authentication/update_profile.html'
     fields = ('first_name',
