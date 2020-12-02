@@ -1,0 +1,64 @@
+{% extends 'admins_base.html' %}
+{% load static %}
+{% block title %}
+Order list
+{% endblock title %}
+{% block body %}
+
+ <table class="table table-striped">
+        <thead class="thead-light"></thead>
+        <tr>
+            <th>Status</th>
+            <th>Order</th>
+            <th>Customer</th>
+            <th>Delivery Address</th>
+            <th>Phone Number</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Price</th>
+            <th>Books</th>
+            <th>Time</th>
+        </tr>
+        {% for order in object_list %}
+            <tr>
+
+                {% if order.status == 'Placed' %}
+                    <td><a
+                           href="{% url 'manager:order-update' order.pk %}">{{ order.status }}</a></td>
+                {% elif order.status == 'Proccessed' %}
+                    <td><a
+                           href="{% url 'manager:order-update' order.pk %}">{{ order.status }}</a></td>
+                {% elif order.status == 'Sent' %}
+                    <td><a
+                           href="{% url 'manager:order-update' order.pk %}">{{ order.status }}</a>
+                    </td>
+                {% endif %}
+
+
+                <td><a href="">{{ order.pk }}</a></td>
+                {% if order.cart.customer.pk %}
+                    <td>
+                        <a href="">{{ order.cart.customer.username }}</a>
+                    </td>
+                {% else %}
+                    <td>Guest</td>
+                {% endif %}
+
+                <td>{{ order.delivery_address }}</td>
+                <td>{{ order.contact_phone }}</td>
+                <td>{{ order.created_date }}</td>
+                <td>{{ order.updated_date }}</td>
+                <td>
+                    {{ order.cart.total_price }} BYN
+                </td>
+                <td>
+                    {% for books in order.cart.books.all %}
+                        <a href="">{{ books.book }}</a> <br>
+                    {% endfor %}
+                </td>
+                <td>{{ order.create }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+       
+{% endblock body %}

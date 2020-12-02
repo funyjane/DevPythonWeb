@@ -5,6 +5,7 @@ from book.models import Book
 User = get_user_model()
 
 class Cart(models.Model):
+
     customer = models.ForeignKey(
         User,
         related_name = 'carts',
@@ -35,6 +36,7 @@ class Cart(models.Model):
 
 
 class BookInCart(models.Model):
+
     cart = models.ForeignKey(
         Cart,
         on_delete=models.CASCADE,
@@ -67,6 +69,7 @@ class BookInCart(models.Model):
 
 
 class Order(models.Model):
+
     user = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
@@ -81,20 +84,42 @@ class Order(models.Model):
         related_name='order',
         verbose_name='Order',
     )
+
+    STATUS_CHOICES = [
+        ('stat1', 'Placed'),
+        ('stat2', 'Proccessed'),
+        ('stat3', 'Sent'),
+    ]
+
+    status = models.CharField(
+        verbose_name='Order Status',
+        max_length=50,
+        choices=STATUS_CHOICES,
+        default='stat1'
+    )
+
+    delivery_address = models.CharField(
+        'Delivery address',
+        max_length=150
+    )
+
     name = models.CharField(
         verbose_name='name',
         max_length=255,
     )
+
     phone = models.CharField(
         verbose_name='Phone number',
         max_length=20,
     )
+
     email = models.EmailField(
         verbose_name='E-mail',
         max_length=40,
     )
+
     DELIVERY_CHOICES = [
-        ('pu', 'Self pickup'),
+        ('pu', 'Self pickup at Minsk, Pervomayskaya str. 24'),
         ('cr', ' Courrier delivery'),
         ('pt', 'Postal delivery')
     ]
@@ -118,3 +143,11 @@ class Order(models.Model):
         verbose_name='Paid',
         default=False
     )
+
+    comment = models.CharField(
+        verbose_name='Additional Comments',
+        max_length=500,
+    )
+
+    class Meta:
+        ordering = ['-create_date']

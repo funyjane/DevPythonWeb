@@ -45,13 +45,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'refference_db',
     'book',
     'crispy_forms',
     'catalog',
     'orders',
     'authentication',
-    'phonenumber_field'
+    'phonenumber_field',
+    'manager_admin'
 ]
 
 MIDDLEWARE = [

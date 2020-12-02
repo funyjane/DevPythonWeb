@@ -1,6 +1,6 @@
 {% load static %}
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
   
@@ -46,22 +46,37 @@
                   <a class="nav-link" href="{% url 'catalog' %}">Catalog</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'about' %}">About us</a>
+                  <a class="nav-link" href="{% url 'manager:order-list' %}">Orders</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'shipping' %}">Shipping and Payments</a>
+                <a class="nav-link" href="{% url 'manager:customer-list' %}">Customers</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'return' %}">Returns</a>
+                <a class="nav-link" href="{% url 'manager:book-list' %}">Books</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'contacts' %}">Contacts</a>
+                <a class="nav-link" href="{% url 'manager:genre-list' %}">Genre</a>
               </li>
               <li class="nav-item">
-              <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
-              <input name="search" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-              </form>
+                <a class="nav-link" href="{% url 'manager:genre-list' %}">Genre</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manager:series-list' %}">Series</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manager:author-list' %}">Author</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manager:publisher-list' %}">Publisher</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manager:format-list-view' %}">Format</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manager:ageres-list-view' %}">Age</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manager:rating-list-view' %}">Rating</a>
               </li>
               <li class="nav-item">
                {% if user.is_authenticated %}
@@ -76,22 +91,18 @@
               <li class="nav-item">
                 <a class="nav-link" href="/cart/"><i class="fas fa-shopping-bag"></i></a>
               </li>
+              <li class="nav-item">
+              <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
+              <input name="search" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+              </form>
+              </li>
               {% if user.is_authenticated %}
               <li class="nav-item"><a class="nav-link" href="#"></a></li> 
               <li class="nav-item"> <a class="nav-link" href="{% url 'profile:logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>   
             {% else %}
               <li class="nav-item"> <a class="nav-link" href="{% url 'profile:signup' %}"> <i class="fas fa-sign-in-alt"></i> Signup</a></li>   
             {% endif %} 
-              <li class="nav-item">
-              <a class="nav-link" href="https://www.nbrb.by/statistics/rates/ratesdaily.asp"> BYN/USD RATE: {{ rate }}</a>
-              </li>
-              {% if user.is_staff or user.is_superuser %}
-              <li class="nav-item">
-                <a class="navbar-brand" href="{% url 'manager:book-list' %}">
-                <button class="btn btn-secondary">Administration</button>
-              </a>
-              </li>
-              {% endif %}
             </ul>
       </div>
   </nav>

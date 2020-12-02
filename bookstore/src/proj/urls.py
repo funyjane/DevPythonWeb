@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-
+from catalog.views import *
 from book.views import *
 from refference_db.views import *
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', include('authentication.urls', namespace='profile')),
 
+    path('book/search/', BookSearch.as_view(), name='search'),
     path('book/<int:pk>/', BookView.as_view(), name = 'book-view'),
     path('book/create/', CreateBookView.as_view(), name = 'book-create'),
     path('book/update/<int:pk>/', UpdateBookView.as_view(), name = 'book-update'),
@@ -73,11 +74,19 @@ urlpatterns = [
     path('rating/create/', CreateRatingView.as_view(), name = 'rating-create'),
     path('rating/update/<int:pk>/', UpdateRatingView.as_view(), name = 'rating-update'),
     path('rating/delete/<int:pk>/', DeleteRatingView.as_view(), name = 'rating-delete'),
-    
+
+    path('error/', ErrorView.as_view(), name = 'error'),
+    path('empty/', EmptyView.as_view(), name = 'empty'),
+    path('return/', ReturnView.as_view(), name = 'return'),
+    path('about/', AboutView.as_view(), name = 'about'),
+    path('shipping/', ShippingView.as_view(), name = 'shipping'),
+    path('contacts/', ContactsView.as_view(), name = 'contacts'),
     path('cart/', include('orders.urls', namespace = 'orders')),
     path('catalog/', include('catalog.urls')),
     
-    path('', BookListView.as_view(), name = 'main-manager')
+    path('test/', BookListView.as_view(), name = 'main-manager'),
+    path('manager/', include('manager_admin.urls', namespace = 'manager')),
+    path('', MainPageView.as_view(), name = 'main')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

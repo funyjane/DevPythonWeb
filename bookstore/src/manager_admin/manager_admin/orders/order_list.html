@@ -1,0 +1,94 @@
+{% extends 'admins_base.html' %}
+{% load static %}
+{% block title %}
+Order list
+{% endblock title %}
+{% block body %}
+
+ <h1>Заказ</h1>
+<h2 style="margin-bottom: 2em;">Order details:</h2>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <table class="table" style="border-style: none;">
+      <tbody>
+        <tr>
+          <th scope="row" style="text-align: end;">ID: </th>
+          <td>{{ object.pk }}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="text-align: end;">Created:</th>
+          <td>{{ object.create_date }}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="text-align: end;">Last update:</th>
+          <td>{{ object.update_date }}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="text-align: end;">Status:</th>
+          <td>{{ object.get_status_display }}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="text-align: end;">Customer:</th>
+          <td>{{ object.user.username }}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="text-align: end;">Name:</th>
+          <td>{{ object.fio }}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="text-align: end;">Phone number:</th>
+          <td>{{ object.phone }}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="text-align: end;">Email:</th>
+          <td>{{ object.user.email }}</td>
+        </tr>
+        <tr>
+        <tr>
+          <th scope="row" style="text-align: end;">Delivery address:</th>
+          <td>{{ object.adress }}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="text-align: end;">Comment:</th>
+          <td>{{ object.comment }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<h2>Includes:</h2>
+<table class="table">
+  <thead>
+    <tr style="text-align: center;">
+      <th scope="col">Pic</th>
+      <th scope="col">Title</th>
+      <th scope="col">Quanity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody style="text-align: center;">
+  {% for obj in object.cart.books.all %}
+      <th scope="row"><img src="{{ obj.book.pic.url }}" alt="" style="max-height: 100px;"></th>
+      <td>{{ obj.book.name }}</td>
+      <td>{{ obj.quantity }}</td>
+      <td>{{ obj.price }}</td>
+      <td>{{ obj.total_price }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<hr>
+<div class="row">
+  <div class="col-5 col-md-6">
+    <a href="{% url 'manager:order-update' object.pk %}" style="text-decoration: solid;">
+      <button class="btn btn-outline-success btn-block">Редактировать</button>
+    </a>
+  </div>
+  <div class="col-7 col-md-6">
+      <p class="h2" style="text-align: right; font-size: 2rem;">Итого к оплате:</p>
+      <p class="h1" style="text-align: right; padding-bottom: 1em; font-size: 2rem;">{{ object.cart.total_price }} руб.</p>
+  </div>
+</div>
+       
+{% endblock body %}

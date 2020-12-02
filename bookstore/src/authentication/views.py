@@ -1,8 +1,9 @@
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
-from django.views.generic import UpdateView, TemplateView, DetailView
+from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView
 from django.contrib.auth import login, authenticate
+from django.views.generic import UpdateView, TemplateView, DetailView
+from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 
@@ -38,6 +39,8 @@ class SignUpView(CreateView):
         username = self.request.POST['username']
         password = self.request.POST['password1']
         user = authenticate(username=username, password=password)
+        group, created = Group.objects.get_or_create(name="Customer")
+        group.user_set.add(user)
         login(self.request, user)
         return HttpResponseRedirect(reverse_lazy('profile:profile-view'))
 
@@ -79,4 +82,4 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
               'address2',
               'zip_code',
               'additional_info')
-    success_url = '/profile'
+    success_url = '/profile/auth/'

@@ -1,6 +1,9 @@
 from django.views.generic import TemplateView, DeleteView, RedirectView, UpdateView, DetailView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.contrib import messages
 
+from authentication.models import Profile
 from book import models as book_models
 from . import models
 
@@ -62,8 +65,7 @@ class CartUpdateView(RedirectView):
         if cart_id:
             cart = models.Cart.objects.filter(pk=cart_id).first()
         else:
-            #redirect to error page
-            pass
+            return reverse_lazy('error')
         button = self.request.POST.get('submit_button')
         if button == 'edit':
             obj_list = []
@@ -88,25 +90,49 @@ class CartUpdateView(RedirectView):
             
         return reverse_lazy('orders:cart')
 
-class CreateOrderView(UpdateView):
+class CreateOrderView(SuccessMessageMixin, UpdateView):
     template_name = 'orders/order.html'
-    success_url = reverse_lazy('main-manager')
+    success_url = reverse_lazy('main')
+    success_message = "Your order has been successfully created. You will be soon contacted by the courier service."
+
     model = models.Order
     fields = [
         'name',
         'phone',
         'email',
+        'delivery_address',
         'delivery'
     ]
+
     def get_object(self, *args, **kwargs):
+        user = self.request.user
         obj = models.Order.objects.get(cart__pk__exact=self.request.session['order_id'])
-        print(obj)
-        return obj
+        if self.request.user.is_authenticated:
+            user_profile = Profile.objects.get(user=user)
+            if user_profile.address1:
+                obj.delivery_address = user_profile.address1
+            if user_profile.phone_number:
+                    obj.phone = user_profile.phone_number
+            if user_profile.email:
+                    obj.email = user_profile.email
+            if user_profile.first_name:
+                    obj.name = user_profile.first_name
+                    obj.save()
+        return obj 
+    
     
 class HistoryDetailView(DetailView):
     model = models.User
     template_name = 'orders/history.html'
     def get_object(self, *args, **kwargs):
         obj = models.User.objects.get(username=self.request.user)
-        print(obj.orders.all)
+        
+        return obj
+
+class OrderStatusView(DetailView):
+    model = models.Order
+    template_name = 'orders/history.html'
+    def get_object(self, *args, **kwargs):
+        obj = models.User.objects.get(username=self.request.user)
+        
         return obj
